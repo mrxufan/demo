@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<title>倒计时</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+</style>
+</head>
+<body>
+
+<div id="countdown"></div>
+
+ 
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+
+countDown(new Date().getTime(),new Date('2020-11-18 18:00').getTime(),done);
+
+//倒计时（开始时间戳，结束时间的时间戳、倒计时完毕执行的方法，2个时间戳需用服务器时间，因为本地时间和服务时间有误差）
+function countDown(startStamp,endStamp,fun){
+    var countdown=document.getElementById("countdown");
+    var time=parseInt((endStamp-startStamp)/1000);
+    var timer=setInterval(function(){
+        if (time<=0) {
+            fun();//倒计时完毕执行
+            clearInterval(timer);//清除倒计时
+            return;
+        }
+        time--;
+        var minute=parseInt(time/60);
+        var second=parseInt(time%60);
+        if (minute<10) {
+            minute='0'+minute;
+        }
+        if (second<10) {
+            second='0'+second;
+        }
+        countdown.innerHTML=minute+':'+second;
+    },1000);
+}
+
+//倒计时完成执行的方法
+function done(){
+    alert('倒计时完毕');
+}
+
+</script>
+</body>
+</html>

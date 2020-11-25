@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>多图上传预览</title>
+<style>
+.upload-btn{width: 100px;height: 100px;border: 1px solid #ddd;box-sizing: border-box;position: relative;float: left;margin-right: 10px;margin-bottom: 10px;}
+.upload-btn input{position: absolute;width: 100%;height: 100%;left: 0;top: 0;opacity: 0;cursor: pointer;}
+.upload-btn::before{content: '';width: 50px;height: 2px;background: #ddd;position: absolute;left: 50%;top: 50%;margin-left: -25px;margin-top: -1px;}
+.upload-btn::after{content: '';width: 2px;height: 50px;background: #ddd;position: absolute;left: 50%;top: 50%;margin-left: -1px;margin-top: -25px;}
+.upload-item{width: 100px;height: 100px;float: left;margin-right: 10px;margin-bottom: 10px;position: relative;}
+.upload-item img{width: 100px;height:100px;}
+.upload-item .del{position: absolute;right: 0;top:0;background: rgba(0,0,0,.5);color: #fff;width: 20px;height: 20px;text-align: center;line-height: 20px;font-size: 18px;cursor: pointer;}
+</style>
+</head>
+<body>
+
+<button onclick="submitBtn(this)">提交</button>
+<div class="upload-wrap">
+    <div class="upload-btn">
+        <input type="file" multiple accept="image/*" onchange="upload(this)">
+    </div>
+</div>
+    
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+var uploadFiles=[];//上传的文件
+//上传图片
+function upload(_this){
+    for(var i=0;i<_this.files.length;i++){
+        if(uploadFiles.length>8||_this.files.length>9){
+            alert('最多上传9张');
+            return;
+        }
+        uploadFiles.push(_this.files[i])
+        var reader = new FileReader();
+        reader.readAsDataURL(_this.files[i]);
+        reader.onload = function(e) {
+            var base64Url=e.target.result;//base64
+            $(_this).parents('.upload-wrap').append('<div class="upload-item">'+
+                                                        '<span class="del" onclick="del(this)">×</span>'+
+                                                        '<img src="'+base64Url+'">'+
+                                                    '</div>');
+        };
+    }
+    $(_this).val('');
+}
+
+//删除图片
+function del(_this){
+    var index=$(_this).parent('.upload-item').index()-1;
+    uploadFiles.splice(index,1);//删除文件
+    $(_this).parents('.upload-wrap').find('.upload-item').eq(index).remove();//删除元素
+    console.log(uploadFiles);
+}
+
+//提交
+function submitBtn(_this){
+    var formData=new FormData();
+    
+    //图片文件
+    if(uploadFiles.length>0){
+        for(var i=0;i<uploadFiles.length;i++){
+            formData.append('file'+i,uploadFiles[i]);//每个file参数不一样
+        }
+    }
+    
+    console.log(uploadFiles);
+}
+</script>
+</body>
+</html>

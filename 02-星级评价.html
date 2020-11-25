@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<title>星级评价</title>
+
+<style>
+.star{float: left;}
+.star span{display: inline-block;width: 30px;height: 30px;background: #ddd;margin-right: 10px;}
+.star span.active{background: red;}
+</style>
+</head>
+<body>
+
+<!-- 星级评价 -->
+<div class="star">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+<span id="starTxt"></span>
+
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+    
+//星级评价  
+var star=document.querySelectorAll('.star span');
+var starTxt=['非常不满意','不满意','一般','满意','非常满意'];
+for (var i = 0; i < star.length; i++) {
+    star[i].index=i;
+    star[i].onclick=function(){
+        document.querySelector('#starTxt').innerHTML=starTxt[this.index];
+        for (var i = 0; i < star.length; i++) {
+            star[i].className='';
+        }
+        for (var i = 0; i < this.index+1; i++) {
+            star[i].className='active';
+        }
+    };
+}
+
+ 
+</script>  
+</body>
+</html>

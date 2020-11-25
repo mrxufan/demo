@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<title>手写签名</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+ *{margin: 0;}
+.signature{border: 1px solid #ddd;}
+.img{width: 100%;height: 250px;}
+.img[src=""]{opacity: 0;}
+</style>
+</head>
+<body>
+
+<p>签名区：</p>
+<div class="signature" id="signature"></div>
+<div style="margin: 15px 0;">
+    <button onclick="getImg()">获取签名</button>
+    <button onclick="reset()">重置</button>
+</div>
+
+<img src="" id="img" class="img">	
+ 
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jSignature.js"></script>
+<script type="text/javascript">
+	$(function() {
+        $("#signature").jSignature({
+            'width':'100%',
+            'height':'300'
+        });
+    });
+    
+    // 获取签名照片
+     function getImg() {
+        var isWrite=$('#signature').jSignature('getData', 'native').length;//判断签名的长度，如果没有签名，则为0
+        var base64=$("#signature").jSignature("getData");//base64
+        if (isWrite==0) {
+            alert('请签名');
+            return;
+        }
+        
+        $('#img').attr('src',base64);
+        var file=dataURLtoFile(base64,'001');//将base64转成文件格式
+        console.log(file);
+     }
+
+     // 重置画布
+     function reset() {
+         $("#signature").jSignature('clear');
+         $('#img').attr('src','');
+     }
+
+
+     //将base64转换为文件（base64、文件名）
+    function dataURLtoFile(dataurl, filename) { 
+        var arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, { type: mime });
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+<view class="container"><text style="margin:20rpx;display:block;">{{"接收参数："+id}}</text><view class="list"><block wx:for="{{list}}" wx:for-item="item" wx:for-index="__i0__"><text>{{item.title}}</text></block></view></view>
