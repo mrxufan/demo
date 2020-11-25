@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<title>美化复选框单选框-兼容IE</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+.radio-wrap span{border-radius: 50%;}
+.checkbox-wrap label,.radio-wrap label{cursor: pointer;}
+.checkbox-wrap span,.radio-wrap span{display: inline-block;width: 15px;height: 15px;border: 1px solid #287EC8;position: relative;vertical-align: bottom;margin-right: 5px;}
+.checkbox-wrap input,.radio-wrap input{opacity: 0;}
+.checkbox-wrap input:checked + span::after{content: '';position: absolute;width: 11px;height: 11px;background: #287EC8;left: 2px;top: 2px;}
+.radio-wrap input:checked + span::after{content: '';position: absolute;width: 11px;height: 11px;background: #287EC8;left: 2px;top: 2px;border-radius: 50%;}
+
+</style>
+</head>
+<body>
+
+<div class="checkbox-wrap">
+    <label><input type="checkbox" value="张三"><span></span>张三</label>
+    <label><input type="checkbox" value="李四"><span></span>李四</label>
+</div>
+
+<div class="radio-wrap">
+    <label><input type="radio" value="男" name="sex" checked><span></span>男</label>
+    <label><input type="radio" value="女" name="sex"><span></span>女</label>
+</div>
+
+</body>
+</html>
