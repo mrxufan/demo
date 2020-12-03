@@ -16,7 +16,7 @@
 </head>
 <body>
 
-<button onclick="juetu()">截图</button>
+<button onclick="jietu()">截图</button>
 <div class="wrap" id="img">
     <img src="images/02.jpg">
     <img src="images/02.jpg">
@@ -33,7 +33,7 @@
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="js/html2canvas.min.js"></script>
 <script type="text/javascript">
-function juetu() {
+function jietu() {
    html2canvas(document.getElementById('img')).then(function(canvas) {
           var base64=canvas.toDataURL('image/jpeg', 1.0);//base64
           var file=dataURLtoFile(base64,'photo.jpg');//文件
