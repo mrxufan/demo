@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+<title>截图（在服务环境打开）</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style>
+    *{margin: 0;padding: 0;}
+    .wrap{width: 500px;float: left;}
+    .wrap img{width: 100%;}
+</style>
+</head>
+<body>
+
+<button onclick="juetu()">截图</button>
+<div class="wrap" id="img">
+    <img src="images/02.jpg">
+    <img src="images/02.jpg">
+    <img src="images/02.jpg">
+    <img src="images/02.jpg">
+    <img src="images/02.jpg">
+</div>
+
+<div style="float: right;">
+    <img src="" id="img2">
+</div>
+
+
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/html2canvas.min.js"></script>
+<script type="text/javascript">
+function juetu() {
+   html2canvas(document.getElementById('img')).then(function(canvas) {
+          var base64=canvas.toDataURL('image/jpeg', 1.0);//base64
+          var file=dataURLtoFile(base64,'photo.jpg');//文件
+          
+          console.log('base64',base64);
+          console.log('文件',file);
+          
+          $('#img2').attr('src',base64);
+        }
+   );
+}
+
+
+//base64转换为文件
+function dataURLtoFile(dataurl, filename) { 
+    var arr = dataurl.split(','),
+    mime = arr[0].match(/:(.*?);/)[1],
+    bstr = atob(arr[1]),
+    n = bstr.length,
+    u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, {
+      type: mime
+    });
+}
+</script>
+</body>
+</html>
