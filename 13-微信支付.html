@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <title>微信支付</title>
 </head>
 <body>
-    <button onclick="payOrder(this)" style="font-size: 200px;">支付</button>
+    <button onclick="payOrder(this)" style="display: block;width: 100%;height: 40px;font-size: 20px;">微信支付</button>
     <script typet="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
     <script>
-	
 	
         var appIdV = "";
         var timeStampV = "";
@@ -19,7 +18,6 @@
         var paySignV = "";
         //支付
         function payOrder(e){
-            //测试。
             $.ajax({
                 url:"http://gygl.xg.ha.cn:8090/roomchoose/v1/payRecord/createJsApiWechat",
                 type:"get",
@@ -28,15 +26,14 @@
                     totalFee:1,
                     body:123,
                     outTradeNo:11,
-                    notifyUrl:"http://xinggangcom.vaiwan.com/v1/payRecord/notifyWechatSave",
-                    openId:"olH35sxQxdWkfrYPlIYwAHbev4QA",//陈秋生
-					 //openId:"olH35s2fYF-CUZYhdgA1hNJzeFB4",//周世勋 
+                    notifyUrl:"",//支付
+                    openId:"olH35s7qpxgv49otVOQATtE210FY",//徐凡
                     attach:"e72b5110ce1e48f3abfe496463db6e50"//单子Id
                 },
                 success:function(data){
                  
                     if(data.errorCode==1) {
-                        var payData = data.data
+                        var payData = data.data;
                         appIdV = payData.appId;
                         timeStampV = payData.timeStamp;
                         nonceStrV = payData.nonceStr;
@@ -44,10 +41,10 @@
                         signTypeV = payData.signType;
                         paySignV = payData.paySign;
                     }
-					console.log(appIdV,timeStampV,nonceStrV,packageV,signTypeV,paySignV)
-                    payUp(appIdV,timeStampV,nonceStrV,packageV,signTypeV,paySignV)
+					console.log(appIdV,timeStampV,nonceStrV,packageV,signTypeV,paySignV);
+                    payUp(appIdV,timeStampV,nonceStrV,packageV,signTypeV,paySignV);
                 },
-            })
+            });
 
         }
 
@@ -56,15 +53,17 @@
             WeixinJSBridge.invoke(
                 'getBrandWCPayRequest', {
                     "appId":appIdV,     //公众号名称，由商户传入
-                    "timeStamp":timeStampV,         //时间戳，自1970年以来的秒数
+                    "timeStamp":timeStampV, //时间戳，自1970年以来的秒数
                     "nonceStr":nonceStrV, //随机串
                     "package":packageV,
-                    "signType":signTypeV,         //微信签名方式：
+                    "signType":signTypeV, //微信签名方式：
                     "paySign":paySignV //微信签名
                 },
                 function(res){
-                    alert(JSON.stringify(res))
+                    alert(JSON.stringify(res));
                     if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                        //支付成功回调，此为跳转到百度
+                        location.href="http://www.baidu.com";
                         // 使用以上方式判断前端返回,微信团队郑重提示：
                         //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
                     }
@@ -80,8 +79,7 @@
         }else{
 	
 			if(appIdV!=''){
-		
-             payUp(appIdV,timeStampV,nonceStrV,packageV,signTypeV,paySignV)
+                payUp(appIdV,timeStampV,nonceStrV,packageV,signTypeV,paySignV);
 			  }
         }
     </script>
