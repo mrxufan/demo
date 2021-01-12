@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <title>圆形进度</title>
+</head>
+<body>
+    
+<div class="progress"></div>
+
+
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/radialIndicator.min.js"></script>
+<script>
+$('.progress').radialIndicator({
+    radius:60,//环形的半径值
+    barWidth: 10,//环形宽度
+    barColor: '#F0CA81',//进度条颜色
+    barBgColor:'#3C3D58',//环形颜色
+    roundCorner : true,//如果设置为true则圆形指示器的刻度bar有圆角
+    fontColor:'#3C3D58',//字体颜色
+    fontSize:30,//字体大小
+    // fontWeight:'bold',//字体weight
+    // percentage:true, //设置为true显示圆形指示器的百分比数值
+    // minValue:0,//最小值
+    initValue: 100,//初始值
+    maxValue:200,//上限值
+});
+    
+</script>
+</body>
+</html>
