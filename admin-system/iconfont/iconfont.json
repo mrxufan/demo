@@ -1,0 +1,30 @@
+{
+  "id": "1982022",
+  "name": "郑铁-智慧餐饮",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1048870",
+      "name": "视频",
+      "font_class": "icon_video",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "8288851",
+      "name": "减号",
+      "font_class": "jianhao",
+      "unicode": "e84f",
+      "unicode_decimal": 59471
+    },
+    {
+      "icon_id": "11124969",
+      "name": "加号",
+      "font_class": "21",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    }
+  ]
+}
