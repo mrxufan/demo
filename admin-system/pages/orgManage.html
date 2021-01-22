@@ -489,7 +489,7 @@
     function importFile(_this){
         //清空formData
         formData=null;
-        formData=new FormData; 
+        formData=new FormData(); 
         var fileName = window.event.target.files[0].name;         
         formData.append("file",window.event.target.files[0]);
         $(_this).parent().siblings('.file-name').html(fileName);
