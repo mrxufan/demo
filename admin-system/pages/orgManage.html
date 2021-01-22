@@ -33,16 +33,17 @@
                                     <option>部门</option>
                                 </select>
                             </div>
+
                             <div class="layui-input-inline">
                                 <a class="layui-btn layui-btn-normal" onclick="searchBtn()">查询</a>
                             </div>
                         </form>
                         <div id="toolbar">
-                            <a href="###" id="addBtn" class="toolbar-btn" onclick="addBtn()">添加</a>
-                            <a href="###" id="editBtn" class="toolbar-btn" onclick="editBtn()">修改</a>
-                            <a href="###" id="delBtn" class="toolbar-btn del" onclick="delBtn()">删除</a>
-                            <a href="###" id="importBtn" class="toolbar-btn"  onclick="importBtn()">导入</a>
-                            <a href="###" id="exportBtn" class="toolbar-btn"  onclick="exportBtn()">导出</a>
+                            <a href="###" id="addBtn" class="solid-btn" onclick="addBtn()">添加</a>
+                            <a href="###" id="editBtn" class="solid-btn" onclick="editBtn()">修改</a>
+                            <a href="###" id="delBtn" class="solid-btn del" onclick="delBtn()">删除</a>
+                            <a href="###" id="importBtn" class="line-btn"  onclick="importBtn()">导入</a>
+                            <a href="###" id="exportBtn" class="line-btn"  onclick="exportBtn()">导出</a>
                         </div>
                         <table id="table"></table>
                     </div>
@@ -60,7 +61,6 @@
 <script type="text/javascript" src="../lib/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
 <script>
-    var pId = ''; //父级id
         getTree();
         // 数据表格
         $('#table').bootstrapTable({
@@ -105,7 +105,6 @@
                     pageSize: params.limit,
                     pageNum: (params.offset / params.limit) + 1,
                     orgName: $('#org').val(), 
-                    pId:pId
                 };
             },
             // responseHandler: function (res) { //处理请求的数据
@@ -138,46 +137,39 @@
                 align: 'center',
                 title: '操作',
                 formatter: function (value, row, index) {
-                    var result ="<a href='javascript:;' class='info' style='color:#129CD6;' onclick='openDetail("+index+")'>详情</a>";
+                    var result ="<a href='javascript:;' class='blue'  onclick='openDetail("+index+")'>详情</a>";
                     return result;
                 }
-            }],
-            //加载成功时执行
-            onLoadSuccess: function (data) {
-                // if (data.rows==0) {
-                //     setTreeTableHeight(130);
-                // }
-            }
+            }]
         });
     
 
-    // 树形菜单
+    // 左侧树形菜单
     function getTree() {
         layui.tree.render({
-                    elem: '#tree', //绑定元素
-                    showLine: false, //是否开启连接线
-                    showCheckbox: false, //是否显示复选框
-                    onlyIconControl: true, //仅允许节点左侧图标控制展开收缩
-                    data: [{
-                            title: '江西' //一级菜单
-                            ,children: [{
-                              title: '南昌' //二级菜单
-                              ,children: [{
-                                title: '高新区' //三级菜单
-                                //…… //以此类推，可无限层级
-                              }]
-                            }]
-                          },{
-                            title: '陕西' //一级菜单
-                            ,children: [{
-                              title: '西安' //二级菜单
-                            }]
-                          }],
-                    click: function (data) {
-                        pId = data.data.id;
-                        $('#table').bootstrapTable('refresh');
-                    }
-                });
+            elem: '#tree', //绑定元素
+            showLine: false, //是否开启连接线
+            showCheckbox: false, //是否显示复选框
+            onlyIconControl: true, //仅允许节点左侧图标控制展开收缩
+            data: [{
+                    title: '江西' //一级菜单
+                    ,children: [{
+                      title: '南昌' //二级菜单
+                      ,children: [{
+                        title: '高新区' //三级菜单
+                        //…… //以此类推，可无限层级
+                      }]
+                    }]
+                  },{
+                    title: '陕西' //一级菜单
+                    ,children: [{
+                      title: '西安' //二级菜单
+                    }]
+                  }],
+            click: function (data) {
+                $('#table').bootstrapTable('refresh');
+            }
+        });
     }
 
     // 查询
@@ -190,64 +182,10 @@
         layer.open({
             type: 1,
             title: '添加',
-            area: ['600px', '450px'],
+            area: ['600px', '400px'],
             btn: ['确定', '取消'],
             btnAlign: 'c',
             success: function (layero, index) {
-                // 查询机构数量，如果当前没有机构，则可以添加顶级机构，否则只能添加子级
-                $.ajax({
-                        url: port + '/v1/organization/getOrgCount',
-                        xhrFields: {
-                            withCredentials: true
-                        },
-                        type: 'get',
-                        success: function (e) {
-                            console.log('机构数量',e);
-                            if (e.rescode=='0000') {
-                                if (e.data.length==0) {
-                                    pId=0;
-                                    layero.find('#upOrg').val('无');
-                                }else{
-                                    layero.find('#upOrg').click(function (event) {
-                                        layer.open({
-                                            type: 1,
-                                            title: '选择机构',
-                                            btn:['关闭'],
-                                            area: ['300px', '450px'],
-                                            btnAlign: 'c',
-                                            success: function (layero1, index1) {
-                                                $.ajax({
-                                                    url: port + '/v1/organization/getOrgTree',
-                                                    xhrFields: {
-                                                        withCredentials: true
-                                                    },
-                                                    type: 'get',
-                                                     data:{
-                                                        orgId:'',
-                                                        tag:''
-                                                    },
-                                                    success: function (e) {
-                                                        layui.tree.render({
-                                                            elem: layero1.find('#tree'), //绑定元素
-                                                            showLine: false, //是否开启连接线
-                                                            showCheckbox: false, //是否显示复选框
-                                                            data: e.data,
-                                                            click: function (e) {
-                                                                layero.find('#upOrg').attr({'value': e.data.title});
-                                                                pId = e.data.id;
-                                                                layer.close(index1);
-                                                            }
-                                                        });
-                                                    }
-                                                });
-                                            },
-                                            content: '<div id="tree"></div>',
-                                        });
-                                    });
-                                }
-                            }
-                        }
-                    });
 
                 layui.form.render('select');
             },
@@ -258,9 +196,9 @@
             content:'<div class="layui-fluid form-layer layui-form">' +
                         '<div class="layui-row">' +
                             '<div class="layui-col-md6">' +
-                                '<label class="layui-form-label"><i class="star"></i>上级机构</label>' +
+                                '<label class="layui-form-label"><i class="star"></i>最多五个字</label>' +
                                 '<div class="layui-input-block">' +
-                                    '<input type="text" autocomplete="off" class="layui-input" readonly placeholder="点击此处选择上级" id="upOrg">' +
+                                    '<input type="text" autocomplete="off" class="layui-input" id="upOrg">' +
                                 '</div>' +
                             '</div>' +
                             '<div class="layui-col-md6">' +
@@ -319,7 +257,7 @@
         layer.open({
             type: 1,
             title: '修改',
-            area: ['600px', '450px'],
+            area: ['600px', '400px'],
             btn: ['确定', '取消'],
             btnAlign: 'c',
             success: function (layero, index) {
@@ -355,7 +293,6 @@
                     type: 'post',
                     data: {
                         orgId: rows[0].orgId, //部门id
-                        pId: pId, //上级机构id
                         orgCode: num, //编号
                         orgName: name, //名称
                         orgType: type, //类型
@@ -379,25 +316,23 @@
             content: '<div class="layui-fluid form-layer layui-form">' +
                         '<div class="layui-row">' +
                             '<div class="layui-col-md6">' +
-                                '<label class="layui-form-label"><i class="star"></i>上级机构</label>' +
+                                '<label class="layui-form-label"><i class="star"></i>最多五个字</label>' +
                                 '<div class="layui-input-block">' +
-                                '<input type="text" autocomplete="off" class="layui-input" readonly placeholder="点击此处选择上级" id="upOrg" data-pid=' + rows[0]
-                                .pId + ' value=' +
-                              rows[0].orgParentName + '>' +
+                                '<input type="text" autocomplete="off" class="layui-input" id="upOrg"  value=' + isNull(rows[0].orgParentName) + '>' +
                                 '</div>' +
                             '</div>' +
                             '<div class="layui-col-md6">' +
                                 '<label class="layui-form-label">编号</label>' +
                                 '<div class="layui-input-block">' +
-                                '<input type="text" autocomplete="off" class="layui-input" id="num" value=' + rows[0]
-                                .orgCode + '>' +
+                                '<input type="text" autocomplete="off" class="layui-input" id="num" value=' + isNull(rows[0]
+                                .orgCode) + '>' +
                                 '</div>' +
                             '</div>' +
                             '<div class="layui-col-md6">' +
                                 '<label class="layui-form-label">名称</label>' +
                                 '<div class="layui-input-block">' +
-                                '<input type="text" autocomplete="off" class="layui-input" id="name" value=' + rows[0]
-                                .orgName + '>' +
+                                '<input type="text" autocomplete="off" class="layui-input" id="name" value=' + isNull(rows[0]
+                                .orgName) + '>' +
                                 '</div>' +
                             '</div>' +
                             '<div class="layui-col-md6">' +
@@ -413,21 +348,21 @@
                             '<div class="layui-col-md6">' +
                                 '<label class="layui-form-label">电话</label>' +
                                 '<div class="layui-input-block">' +
-                                '<input type="text" autocomplete="off" class="layui-input" id="phone" value=' + rows[0]
-                                .orgMobile + '>' +
+                                '<input type="text" autocomplete="off" class="layui-input" id="phone" value=' + isNull(rows[0]
+                                .orgMobile) + '>' +
                                 '</div>' +
                             '</div>' +
                             '<div class="layui-col-md6">' +
                                 '<label class="layui-form-label">负责人</label>' +
                                 '<div class="layui-input-block">' +
-                                '<input type="text" autocomplete="off" class="layui-input" id="user" value=' + rows[0]
-                                .orgPrincipal + '>' +
+                                '<input type="text" autocomplete="off" class="layui-input" id="user" value=' + isNull(rows[0]
+                                .orgPrincipal) + '>' +
                                 '</div>' +
                             '</div>' +
                             '<div class="layui-col-md12">' +
                                 '<label class="layui-form-label">备注</label>' +
                                 '<div class="layui-input-block">' +
-                                '<textarea class="layui-textarea" id="remark" maxlength="100">' + rows[0].orgMark + '</textarea>' +
+                                '<textarea class="layui-textarea" id="remark" maxlength="100">' + isNull(rows[0].orgMark) + '</textarea>' +
                                 '</div>' +
                             '</div>' +
                         '</div>' +
