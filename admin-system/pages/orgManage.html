@@ -15,10 +15,10 @@
 <body>
     <div class="layui-fluid">
         <div class="layui-row bg_fff">
-            <div class="layui-col-md2" style="overflow-y: auto;">
-                <div id="tree" class="layui-tree left-side-tree" style="border-right: 1px solid #eee;"></div>
+            <div class="layui-col-md2 layui-col-sm2 layui-col-xs2">
+                <div id="tree" class="layui-tree left-side-tree"></div>
             </div>
-            <div class="layui-col-md10">
+            <div class="layui-col-md10 layui-col-sm10 layui-col-xs10">
                 <div class="layui-card">
                     <div class="layui-card-body">
                         <form class="layui-form">
@@ -462,7 +462,6 @@
                         },
                         success: function (e) {
                             if (e.rescode == '0000') {
-                                getTree();
                                 $('#table').bootstrapTable('refresh');
                                 layer.msg('删除成功');
                                 layer.close(index);

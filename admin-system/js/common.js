@@ -13,7 +13,6 @@
 	var idCardReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/; //身份证
 	var posReg = /^\d+(\.\d+)?$/; //非负浮点数
 	var dateReg = /^[1-9]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/; //日期xxxx-xx-xx
-	
 
 
 	//除了登录页面以外进行登录验证
@@ -38,11 +37,9 @@
 
 
 	//左侧树形菜单高度
-	$('.left-side-tree').css({ 'height': $(document).height() - 30 });
+	$('.left-side-tree').css({ 'height': $(document).height() - 30 ,'overflow':'auto'});
 
-	// 设置iframe内高度
-	// $('.layui-card-body').css('height', $(window).height() - 30);
-	
+
 
 	//日期转时间戳
 	function timeStamp(date) {
@@ -154,60 +151,6 @@
 	    return (year + "-" + month + "-" + date);
 	}
 
-	// 查询角色名称下拉
-	function roleNameList(ele, id) {
-	    $.ajax({
-	        url: port + '/v1/role/all',
-	        xhrFields: {
-	            withCredentials: true
-	        },
-	        type: 'get',
-	        async: false,
-	        data: {
-	            pageNum: 1,
-	            pageSize: 1000
-	        },
-	        success: function(e) {
-	            console.log(e.rows)
-	            var arr = e.rows;
-	            if (arr.length > 0) {
-	                for (var i = 0; i < arr.length; i++) {
-	                    $(ele).append('<option value=' + (id ? arr[i].rId : arr[i].rName) + '>' + arr[i].rName + '</option>');
-	                    layui.form.render('select');
-	                }
-	            } else {
-	                $(ele).append('<option></option>');
-	                layui.form.render('select');
-	            }
-	        }
-	    });
-	}
-
-	// 查询步骤下拉
-	function stepNameList(ele, id) {
-	    $.ajax({
-	        url: port + '/v1/step/all',
-	        xhrFields: {
-	            withCredentials: true
-	        },
-	        type: 'get',
-	        async: false,
-	        success: function(e) {
-	            if (e.length > 0) {
-	                for (var i = 0; i < e.length; i++) {
-	                    $(ele).append('<option value=' + (id ? e[i].sId : e[i].sName) + '>' + e[i].sName + '</option>');
-	                    layui.form.render('select');
-	                }
-	            } else {
-	                $(ele).append('<option></option>');
-	                layui.form.render('select');
-	            }
-	        }
-	    });
-	}
-
-
-
 	//动态获取左侧菜单
 	function getMenu(ele) {
 	    $(ele).html('');
@@ -252,15 +195,12 @@
 
 	//非空判断
 	function isNull(e) {
-	    if (e === "" || e === null || e === undefined) {
-	        return "";
-	    } else {
+	    if (e) {
 	        return e;
+	    } else {
+	        return '';
 	    }
 	}
-
-
-
 
 	//导入下载错误信息 
 	function downloadErrMsg(_this) {
