@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <title>map图片热区</title>
+     <style>
+        *{margin: 0;padding: 0;}
+    body{overflow: hidden;}
+    </style>
+</head>
+<body>
+    
+<img src="images/visual_bg.png" usemap="#image-map" style="width: 100%;" hidefocus="true">
+
+<map name="image-map">
+    <area href="javascript:;" onclick="openBuild('2号楼')" coords="2372,2410,2426,2556,2911,2356,2917,2295,2875,2235" shape="poly">
+    <area  href="javascript:;" onclick="openBuild('1号楼')" coords="2481,2586,2505,2647,2554,2719,2917,2568,2917,2507,2863,2423" shape="poly">
+</map>
+
+
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="plugins/layui/layui.all.js"></script>
+<script type="text/javascript" src="js/jquery.rwdImageMaps.js"></script>
+<script>
+
+//热区点击事件
+function openBuild (name) {
+    layer.msg(name);
+}
+
+// 热区自适应
+$(document).ready(function(e) {
+    $('img[usemap]').rwdImageMaps();
+});
+    
+</script>
+</body>
+</html>
