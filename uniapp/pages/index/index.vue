@@ -1,6 +1,8 @@
 <template>
 	<view class="container">
 		
+		<view class="unit"></view>
+		
 		<view class="form">
 			<input type="text" @input="input" />
 			<button size="mini" type="default" v-on:click="toList">跳转</button>
@@ -42,4 +44,6 @@
 	.form button,.form input{float: left;}
 	.form{margin: 20rpx;}
 	.form input{border: 1rpx solid #ddd;padding: 4rpx;}
+	
+	.unit{width: 100rpx;height: 100rpx;background-color: #333;}
 </style>
