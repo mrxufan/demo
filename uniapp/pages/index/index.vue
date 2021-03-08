@@ -30,6 +30,9 @@
 			<button size="mini" type="default" v-on:click="setScreenLightMin">屏幕亮度中间</button>
 			<button size="mini" type="default" v-on:click="setScreenLightDark">屏幕亮度最暗</button>
 			<button size="mini" type="default" v-on:click="setBarTitle">设置导航栏标题</button>
+			<button size="mini" type="default" v-on:click="getNetworkType">获取网络类型</button>
+			<button size="mini" type="default" v-on:click="getSystemInfo">获取系统信息</button>
+			<button size="mini" type="default" v-on:click="addUser">添加手机联系人</button>
 		</view>
 
 
@@ -78,7 +81,6 @@
 			},
 			// 初始化蓝牙
 			initBluetooth() {
-				//在页面加载时候初始化蓝牙适配器
 				uni.openBluetoothAdapter({
 					success: e => {
 						console.log('初始化蓝牙成功:', e)
@@ -105,11 +107,6 @@
 			// 搜索蓝牙设备
 			searchBluetooth() {
 				var _this = this;
-				// uni.startBluetoothDevicesDiscovery({
-				// 	success(res) {
-				// 		_this.test=res
-				// 	}
-				// })
 
 				uni.getBluetoothAdapterState({
 					success(res) {
@@ -188,6 +185,47 @@
 			setBarTitle() {
 				uni.setNavigationBarTitle({
 					title: '新的标题'
+				});
+			},
+			// 获取网络类型
+			getNetworkType(){
+				uni.getNetworkType({
+				    success: function (res) {
+						uni.showToast({
+							title:res.networkType,
+							icon:'none'
+						})
+				    }
+				});
+			},
+			// 获取系统信息
+			getSystemInfo(){
+				uni.getSystemInfo({
+				    success: function (res) {
+				        console.log(res);
+				    }
+				});
+			},
+			// 添加手机联系人
+			addUser(){
+				uni.addPhoneContact({
+				    lastName: '张',
+				    firstName: '三',
+					mobilePhoneNumber:'13888888888',
+				    success: function () {
+				        console.log('成功');
+						uni.showToast({
+							title:'添加成功',
+							icon:'none'
+						})
+				    },
+				    fail: function () {
+				        console.log('失败');
+						uni.showToast({
+							title:'添加失败',
+							icon:'none'
+						})
+				    }
 				});
 			}
 
