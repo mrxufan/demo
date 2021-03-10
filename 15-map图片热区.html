@@ -7,6 +7,7 @@
      <style>
         *{margin: 0;padding: 0;}
     body{overflow: hidden;}
+    area{outline: 1px solid red;background: red;}
     </style>
 </head>
 <body>
@@ -14,7 +15,7 @@
 <img src="images/visual_bg.png" usemap="#image-map" style="width: 100%;" hidefocus="true">
 
 <map name="image-map">
-    <area href="javascript:;" onclick="openBuild('2号楼')" coords="2372,2410,2426,2556,2911,2356,2917,2295,2875,2235" shape="poly">
+    <area href="javascript:;" onclick="openBuild('2号楼')" style="background: red" coords="2372,2410,2426,2556,2911,2356,2917,2295,2875,2235" shape="poly">
     <area  href="javascript:;" onclick="openBuild('1号楼')" coords="2481,2586,2505,2647,2554,2719,2917,2568,2917,2507,2863,2423" shape="poly">
 </map>
 
@@ -27,6 +28,7 @@
 //热区点击事件
 function openBuild (name) {
     layer.msg(name);
+    console.log(msg)
 }
 
 // 热区自适应
