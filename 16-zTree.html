@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <link rel="stylesheet" type="text/css" href="plugins/zTree/css/zTreeStyle/zTreeStyle.css">
+    <title>zTree</title>
+     <style>
+       
+    </style>
+</head>
+<body>
+    
+<button onclick="getNode()">获取选中节点</button>
+<ul id="tree" class="ztree"></ul>
+
+
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="plugins/zTree/js/jquery.ztree.all.min.js"></script>
+<script>
+
+var tree = $.fn.zTree.init($("#tree"), {
+            check: {
+                enable: true,
+                chkStyle: "checkbox",
+                showLine:false
+            },
+            view:{
+                showIcon:false
+            }
+        }, [
+            {"name":"北京",children:[
+                {"name":"东城区","checked":true},
+                {"name":"朝阳区"}
+            ]},
+            {"name":"重庆",children:[
+                {"name":"巴南区",children:[
+                    {"name":"南泉"},
+                    {"name":"界石"}
+                ]},
+                {"name":"渝中区"}
+            ]}
+        ]); 
+
+
+function getNode(){
+    var treeObj=$.fn.zTree.getZTreeObj("tree");
+    nodes=treeObj.getCheckedNodes(true);
+    console.log(nodes);
+}
+    
+</script>
+</body>
+</html>
