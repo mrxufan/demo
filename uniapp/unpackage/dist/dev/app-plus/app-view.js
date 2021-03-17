@@ -296,15 +296,14 @@ var render = function() {
         ],
         1
       ),
-      _c("div", { attrs: { _i: 11 } }, [_vm._v(_vm._$g(11, "t0-0"))]),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(12, "sc"), attrs: { _i: 12 } },
+        { staticClass: _vm._$g(11, "sc"), attrs: { _i: 11 } },
         [
           _c(
             "v-uni-button",
             {
-              attrs: { size: "mini", type: "default", _i: 13 },
+              attrs: { size: "mini", type: "default", _i: 12 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -316,19 +315,19 @@ var render = function() {
           _c(
             "v-uni-button",
             {
-              attrs: { size: "mini", type: "default", _i: 14 },
+              attrs: { size: "mini", type: "default", _i: 13 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
                 }
               }
             },
-            [_vm._v("初始化蓝牙")]
+            [_vm._v("打开蓝牙")]
           ),
           _c(
             "v-uni-button",
             {
-              attrs: { size: "mini", type: "default", _i: 15 },
+              attrs: { size: "mini", type: "default", _i: 14 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -340,7 +339,7 @@ var render = function() {
           _c(
             "v-uni-button",
             {
-              attrs: { size: "mini", type: "default", _i: 16 },
+              attrs: { size: "mini", type: "default", _i: 15 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -352,7 +351,7 @@ var render = function() {
           _c(
             "v-uni-button",
             {
-              attrs: { size: "mini", type: "default", _i: 17 },
+              attrs: { size: "mini", type: "default", _i: 16 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -364,7 +363,7 @@ var render = function() {
           _c(
             "v-uni-button",
             {
-              attrs: { size: "mini", type: "default", _i: 18 },
+              attrs: { size: "mini", type: "default", _i: 17 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -376,7 +375,7 @@ var render = function() {
           _c(
             "v-uni-button",
             {
-              attrs: { size: "mini", type: "default", _i: 19 },
+              attrs: { size: "mini", type: "default", _i: 18 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -388,7 +387,7 @@ var render = function() {
           _c(
             "v-uni-button",
             {
-              attrs: { size: "mini", type: "default", _i: 20 },
+              attrs: { size: "mini", type: "default", _i: 19 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -400,7 +399,7 @@ var render = function() {
           _c(
             "v-uni-button",
             {
-              attrs: { size: "mini", type: "default", _i: 21 },
+              attrs: { size: "mini", type: "default", _i: 20 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -412,7 +411,7 @@ var render = function() {
           _c(
             "v-uni-button",
             {
-              attrs: { size: "mini", type: "default", _i: 22 },
+              attrs: { size: "mini", type: "default", _i: 21 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -424,7 +423,7 @@ var render = function() {
           _c(
             "v-uni-button",
             {
-              attrs: { size: "mini", type: "default", _i: 23 },
+              attrs: { size: "mini", type: "default", _i: 22 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -438,18 +437,30 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(24, "sc"), attrs: { _i: 24 } },
+        { staticClass: _vm._$g(23, "sc"), attrs: { _i: 23 } },
         [
           _c("v-uni-input", {
-            attrs: { type: "text", _i: 25 },
+            attrs: { type: "text", _i: 24 },
             model: {
-              value: _vm._$g(25, "v-model"),
+              value: _vm._$g(24, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(25, $$v)
+                _vm.$handleVModelEvent(24, $$v)
               },
               expression: "value"
             }
           }),
+          _c(
+            "v-uni-button",
+            {
+              attrs: { size: "mini", type: "default", _i: 25 },
+              on: {
+                click: function($event) {
+                  return _vm.$handleViewEvent($event)
+                }
+              }
+            },
+            [_vm._v("跳转")]
+          ),
           _c(
             "v-uni-button",
             {
@@ -460,11 +471,12 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("跳转")]
+            [_vm._v("清空打印")]
           )
         ],
         1
-      )
+      ),
+      _c("div", { attrs: { _i: 27 } }, [_vm._v(_vm._$g(27, "t0-0"))])
     ],
     1
   )

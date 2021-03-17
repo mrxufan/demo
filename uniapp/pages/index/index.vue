@@ -19,11 +19,11 @@
 				</view>
 			</view>
 		</view>
-		<div>{{test}}</div>
+		
 
 		<view class="wrap">
 			<button size="mini" type="default" v-on:click="openScanCode">打开扫码</button>
-			<button size="mini" type="default" v-on:click="initBluetooth">初始化蓝牙</button>
+			<button size="mini" type="default" v-on:click="openPhoneBluetooth">打开蓝牙</button>
 			<button size="mini" type="default" v-on:click="getPosition">获取位置</button>
 			<button size="mini" type="default" v-on:click="chooseImg">选择图片</button>
 			<button size="mini" type="default" v-on:click="setScreenLightAdd">屏幕亮度最亮</button>
@@ -39,8 +39,9 @@
 		<view class="form">
 			<input type="text" v-model="value" />
 			<button size="mini" type="default" v-on:click="toList">跳转</button>
+			<button size="mini" type="default" v-on:click="test=''">清空打印</button>
 		</view>
-
+		<div>{{test}}</div>
 	</view>
 </template>
 
@@ -79,23 +80,7 @@
 					}
 				});
 			},
-			// 初始化蓝牙
-			initBluetooth() {
-				uni.openBluetoothAdapter({
-					success: e => {
-						console.log('初始化蓝牙成功:', e)
-						uni.startBluetoothDevicesDiscovery({
-							success(ee) {
-								console.log('搜索外围蓝牙', ee)
-							}
-						})
-					},
-					fail: e => {
-						console.log('初始化蓝牙失败，错误码:', e.errCode || e.errMsg)
-
-					}
-				});
-			},
+			
 			// 关闭蓝牙
 			closeBluetooth() {
 				uni.closeBluetoothAdapter({
@@ -200,8 +185,10 @@
 			},
 			// 获取系统信息
 			getSystemInfo(){
+				var _this=this;
 				uni.getSystemInfo({
 				    success: function (res) {
+						_this.test=res
 				        console.log(res);
 				    }
 				});
@@ -227,6 +214,27 @@
 						})
 				    }
 				});
+			},
+			// 打开蓝牙
+			openPhoneBluetooth(){
+				var main,BluetoothAdapter,BAdapter;
+				switch(uni.getSystemInfoSync().platform){
+					case 'android':
+						console.log('运行在Android上');
+						main=plus.android.runtimeMainActivity();
+						BluetoothAdapter=plus.android.importClass("android.bluetooth.BluetoothAdapter");
+						BAdapter=BluetoothAdapter.getDefaultAdapter();
+						if(!BAdapter.isEnabled()){
+							BAdapter.enable();
+						}
+						break;
+					case 'ios':
+						console.log('运行在ios上');
+						break;
+					default:
+						console.log('其他');
+						break;
+				}
 			}
 
 		},
@@ -235,7 +243,7 @@
 			this.getScreenLight()
 		},
 		onLoad() {
-
+			
 		},
 	}
 </script>
