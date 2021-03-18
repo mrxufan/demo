@@ -1,5 +1,23 @@
-.swiper image{width: 100%;}
-.form button,.form input{float: left;}
-.form{margin: 20rpx;}
-.form input{border: 1rpx solid #ddd;padding: 4rpx;}
+.wrap button {
+	margin: 10px;
+}
+.swiper image {
+	width: 100%;
+}
+.form button,
+.form input {
+	float: left;
+}
+.form {
+	margin: 20rpx;
+}
+.form input {
+	border: 1rpx solid #ddd;
+	padding: 4rpx;
+}
+.unit {
+	width: 100rpx;
+	height: 100rpx;
+	background-color: #333;
+}
 

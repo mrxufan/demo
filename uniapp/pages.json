@@ -8,7 +8,7 @@
 	}, {
 		"path": "pages/list/list",
 		"style": {
-			"navigationBarTitleText": "list",
+			"navigationBarTitleText": "列表",
 			"navigationBarBackgroundColor": "#5FA9E9",
 			"enablePullDownRefresh": true
 		}
@@ -18,6 +18,12 @@
 			"navigationBarTitleText": "我的",
 			"navigationBarBackgroundColor": "#5FA9E9",
 			"enablePullDownRefresh": true
+		}
+	},{
+		"path": "pages/web/test",
+		"style": {
+			"navigationBarTitleText": "",
+			"navigationBarBackgroundColor": "#5FA9E9"
 		}
 	}],
 	"globalStyle": {

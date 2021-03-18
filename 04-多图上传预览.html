@@ -24,16 +24,17 @@
 </div>
     
 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="plugins/layui/layui.all.js"></script>
 <script type="text/javascript">
 var uploadFiles=[];//上传的文件
 //上传图片
 function upload(_this){
     for(var i=0;i<_this.files.length;i++){
         if(uploadFiles.length>8||_this.files.length>9){
-            alert('最多上传9张');
+            layer.msg('最多上传9张');
             return;
         }
-        uploadFiles.push(_this.files[i])
+        uploadFiles.push(_this.files[i]);
         var reader = new FileReader();
         reader.readAsDataURL(_this.files[i]);
         reader.onload = function(e) {
@@ -68,6 +69,9 @@ function submitBtn(_this){
     
     console.log(uploadFiles);
 }
+
+
+
 </script>
 </body>
 </html>

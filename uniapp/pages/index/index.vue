@@ -33,6 +33,8 @@
 			<button size="mini" type="default" v-on:click="getNetworkType">获取网络类型</button>
 			<button size="mini" type="default" v-on:click="getSystemInfo">获取系统信息</button>
 			<button size="mini" type="default" v-on:click="addUser">添加手机联系人</button>
+			<button size="mini" type="default" v-on:click="openWeb">跳转h5页面</button>
+			<button size="mini" type="default" v-on:click="openSet">打开设置</button>
 		</view>
 
 
@@ -68,11 +70,14 @@
 			},
 			// 打开扫码
 			openScanCode() {
+				var _this=this;
 				uni.scanCode({
-					scanType: ['barCode'],
+					scanType: ['barCode','qrCode'],
 					success: function(res) {
-						console.log('条码类型：' + res.scanType);
-						console.log('条码内容：' + res.result);
+						console.log(res)
+						// console.log('条码类型：' + res.scanType);
+						// console.log('条码内容：' + res.result);
+						_this.test=JSON.stringify(res)
 
 						uni.showToast({
 							title: '条码类型：' + res.scanType
@@ -81,14 +86,6 @@
 				});
 			},
 			
-			// 关闭蓝牙
-			closeBluetooth() {
-				uni.closeBluetoothAdapter({
-					success(res) {
-						console.log('关闭蓝牙', res)
-					}
-				})
-			},
 			// 搜索蓝牙设备
 			searchBluetooth() {
 				var _this = this;
@@ -110,8 +107,11 @@
 			},
 			// 设置
 			openSet() {
-				var _this = this;
-				_this.test = uni
+				var main = plus.android.runtimeMainActivity(); //获取activity  
+				var Intent = plus.android.importClass('android.content.Intent');  
+				var Settings = plus.android.importClass('android.provider.Settings');  
+				var intent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS);//可设置表中所有Action字段  
+				main.startActivity(intent);
 			},
 			// 选择图片
 			chooseImg() {
@@ -217,25 +217,60 @@
 			},
 			// 打开蓝牙
 			openPhoneBluetooth(){
-				var main,BluetoothAdapter,BAdapter;
-				switch(uni.getSystemInfoSync().platform){
-					case 'android':
-						console.log('运行在Android上');
-						main=plus.android.runtimeMainActivity();
-						BluetoothAdapter=plus.android.importClass("android.bluetooth.BluetoothAdapter");
-						BAdapter=BluetoothAdapter.getDefaultAdapter();
-						if(!BAdapter.isEnabled()){
-							BAdapter.enable();
-						}
-						break;
-					case 'ios':
-						console.log('运行在ios上');
-						break;
-					default:
-						console.log('其他');
-						break;
-				}
+				// var main,BluetoothAdapter,BAdapter;
+				// switch(uni.getSystemInfoSync().platform){
+				// 	case 'android':
+				// 		console.log('运行在Android上');
+				// 		main=plus.android.runtimeMainActivity();
+				// 		BluetoothAdapter=plus.android.importClass("android.bluetooth.BluetoothAdapter");
+				// 		BAdapter=BluetoothAdapter.getDefaultAdapter();
+				// 		if(!BAdapter.isEnabled()){
+				// 			BAdapter.enable();
+				// 		}
+				// 		break;
+				// 	case 'ios':
+				// 		console.log('运行在ios上');
+				// 		break;
+				// 	default:
+				// 		console.log('其他');
+				// 		break;
+				// }
+				
+				
+				var main = plus.android.runtimeMainActivity();
+				var BluetoothAdapter = plus.android.importClass("android.bluetooth.BluetoothAdapter");  
+				var BAdapter = new BluetoothAdapter.getDefaultAdapter();  
+				var receiver=plus.android.implements('io.dcloud.android.content.BroadcastReceiver', {  
+				onReceive: function(context, intent) { //实现onReceiver回调函数  
+				    plus.android.importClass(intent);  
+				 //    console.log(intent.getAction(),'点击允许');  
+					// uni.showToast({
+					// 	title:'蓝牙已开启',
+					// 	icon:'none'
+					// })
+					
+				    main.unregisterReceiver(receiver);  
+				    }  
+				});  
+				var IntentFilter = plus.android.importClass('android.content.IntentFilter');  
+				var filter = new IntentFilter();  
+				filter.addAction(BAdapter.ACTION_STATE_CHANGED); //监听蓝牙开关  
+				main.registerReceiver(receiver, filter); //注册监听  
+				
+				if (!BAdapter.isEnabled()) {  
+				    BAdapter.enable(); //启动蓝牙  
+				}else{  
+				    BAdapter.disable();  
+				} 
+				
+			},
+			// 跳转h5
+			openWeb(){
+				uni.navigateTo({
+					url: '../web/test'
+				})
 			}
+			
 
 		},
 		onShow() {
