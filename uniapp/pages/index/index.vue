@@ -32,7 +32,6 @@
 			<button size="mini" type="default" v-on:click="setBarTitle">设置导航栏标题</button>
 			<button size="mini" type="default" v-on:click="getNetworkType">获取网络类型</button>
 			<button size="mini" type="default" v-on:click="getSystemInfo">获取系统信息</button>
-			<button size="mini" type="default" v-on:click="addUser">添加手机联系人</button>
 			<button size="mini" type="default" v-on:click="openWeb">跳转h5页面</button>
 			<button size="mini" type="default" v-on:click="openSet">打开设置</button>
 		</view>
@@ -193,28 +192,7 @@
 				    }
 				});
 			},
-			// 添加手机联系人
-			addUser(){
-				uni.addPhoneContact({
-				    lastName: '张',
-				    firstName: '三',
-					mobilePhoneNumber:'13888888888',
-				    success: function () {
-				        console.log('成功');
-						uni.showToast({
-							title:'添加成功',
-							icon:'none'
-						})
-				    },
-				    fail: function () {
-				        console.log('失败');
-						uni.showToast({
-							title:'添加失败',
-							icon:'none'
-						})
-				    }
-				});
-			},
+			
 			// 打开蓝牙
 			openPhoneBluetooth(){
 				// var main,BluetoothAdapter,BAdapter;
