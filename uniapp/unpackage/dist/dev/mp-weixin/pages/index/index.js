@@ -241,12 +241,18 @@ var _default = { data: function data() {return { value: '', //输入框
       test: '', screenValue: 0, //屏幕亮度值
       indicatorDots: true, autoplay: true, interval: 2000, duration: 500 };}, methods: { // 跳转到list页面
     toList: function toList() {uni.navigateTo({ url: '../list/list?id=' + this.value });}, // 打开扫码
-    openScanCode: function openScanCode() {uni.scanCode({ scanType: ['barCode'], success: function success(res) {console.log('条码类型：' + res.scanType);console.log('条码内容：' + res.result);uni.showToast({ title: '条码类型：' + res.scanType });} });}, // 搜索蓝牙设备
+    openScanCode: function openScanCode() {var _this = this;uni.scanCode({ scanType: ['barCode', 'qrCode'], success: function success(res) {console.log(res); // console.log('条码类型：' + res.scanType);
+          // console.log('条码内容：' + res.result);
+          _this.test = JSON.stringify(res);uni.showToast({ title: '条码类型：' + res.scanType });} });}, // 搜索蓝牙设备
     searchBluetooth: function searchBluetooth() {var _this = this;uni.getBluetoothAdapterState({ success: function success(res) {_this.test = res;} });}, // 获取位置
-    getPosition: function getPosition() {var _this = this;uni.getLocation({ success: function success(res) {_this.test = res;} });}, // 设置
+    getPosition: function getPosition() {var _this = this;uni.getLocation({ success: function success(res) {_this.test = res;} });},
+    // 设置
     openSet: function openSet() {
-      var _this = this;
-      _this.test = uni;
+      var main = plus.android.runtimeMainActivity(); //获取activity  
+      var Intent = plus.android.importClass('android.content.Intent');
+      var Settings = plus.android.importClass('android.provider.Settings');
+      var intent = new Intent(Settings.ACTION_BLUETOOTH_SETTINGS); //可设置表中所有Action字段  
+      main.startActivity(intent);
     },
     // 选择图片
     chooseImg: function chooseImg() {
@@ -328,28 +334,7 @@ var _default = { data: function data() {return { value: '', //输入框
         } });
 
     },
-    // 添加手机联系人
-    addUser: function addUser() {
-      uni.addPhoneContact({
-        lastName: '张',
-        firstName: '三',
-        mobilePhoneNumber: '13888888888',
-        success: function success() {
-          console.log('成功');
-          uni.showToast({
-            title: '添加成功',
-            icon: 'none' });
 
-        },
-        fail: function fail() {
-          console.log('失败');
-          uni.showToast({
-            title: '添加失败',
-            icon: 'none' });
-
-        } });
-
-    },
     // 打开蓝牙
     openPhoneBluetooth: function openPhoneBluetooth() {
       // var main,BluetoothAdapter,BAdapter;
@@ -400,9 +385,9 @@ var _default = { data: function data() {return { value: '', //输入框
 
     },
     // 跳转h5
-    openH5: function openH5() {
+    openWeb: function openWeb() {
       uni.navigateTo({
-        url: '../h5/test' });
+        url: '../web/test' });
 
     } },
 

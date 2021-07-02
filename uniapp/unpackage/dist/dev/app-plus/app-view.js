@@ -431,24 +431,12 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("添加手机联系人")]
-          ),
-          _c(
-            "v-uni-button",
-            {
-              attrs: { size: "mini", type: "default", _i: 23 },
-              on: {
-                click: function($event) {
-                  return _vm.$handleViewEvent($event)
-                }
-              }
-            },
             [_vm._v("跳转h5页面")]
           ),
           _c(
             "v-uni-button",
             {
-              attrs: { size: "mini", type: "default", _i: 24 },
+              attrs: { size: "mini", type: "default", _i: 23 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -462,14 +450,14 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticClass: _vm._$g(25, "sc"), attrs: { _i: 25 } },
+        { staticClass: _vm._$g(24, "sc"), attrs: { _i: 24 } },
         [
           _c("v-uni-input", {
-            attrs: { type: "text", _i: 26 },
+            attrs: { type: "text", _i: 25 },
             model: {
-              value: _vm._$g(26, "v-model"),
+              value: _vm._$g(25, "v-model"),
               callback: function($$v) {
-                _vm.$handleVModelEvent(26, $$v)
+                _vm.$handleVModelEvent(25, $$v)
               },
               expression: "value"
             }
@@ -477,7 +465,7 @@ var render = function() {
           _c(
             "v-uni-button",
             {
-              attrs: { size: "mini", type: "default", _i: 27 },
+              attrs: { size: "mini", type: "default", _i: 26 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -489,7 +477,7 @@ var render = function() {
           _c(
             "v-uni-button",
             {
-              attrs: { size: "mini", type: "default", _i: 28 },
+              attrs: { size: "mini", type: "default", _i: 27 },
               on: {
                 click: function($event) {
                   return _vm.$handleViewEvent($event)
@@ -501,7 +489,7 @@ var render = function() {
         ],
         1
       ),
-      _c("div", { attrs: { _i: 29 } }, [_vm._v(_vm._$g(29, "t0-0"))])
+      _c("div", { attrs: { _i: 28 } }, [_vm._v(_vm._$g(28, "t0-0"))])
     ],
     1
   )
@@ -1598,15 +1586,7 @@ var render = function() {
   return _c(
     "v-uni-view",
     { staticClass: _vm._$g(0, "sc"), attrs: { _i: 0 } },
-    [
-      _c("v-uni-web-view", {
-        attrs: {
-          "webview-styles": _vm._$g(1, "a-webview-styles"),
-          src: "https://www.baidu.com",
-          _i: 1
-        }
-      })
-    ],
+    [_c("v-uni-web-view", { attrs: { src: "https://www.baidu.com", _i: 1 } })],
     1
   )
 }

@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		 <web-view :webview-styles="webviewStyles" src="https://www.baidu.com"></web-view>
+		 <web-view src="https://www.baidu.com"></web-view>
 	</view>
 </template>
 

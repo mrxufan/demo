@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "list",
+  "navigationBarTitleText": "列表",
   "navigationBarBackgroundColor": "#5FA9E9",
   "enablePullDownRefresh": true,
   "usingComponents": {}

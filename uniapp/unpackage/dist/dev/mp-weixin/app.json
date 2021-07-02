@@ -2,7 +2,8 @@
     "pages": [
         "pages/index/index",
         "pages/list/list",
-        "pages/me/me"
+        "pages/me/me",
+        "pages/web/test"
     ],
     "subPackages": [],
     "window": {
